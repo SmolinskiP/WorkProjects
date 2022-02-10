@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+button {
+  background-color: #0b4d98;
+  color: white;
+  padding: 12px 20px;
+  margin: 6px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+#outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+.cancelbtn {
+  width: 100%;
+  padding: 20px 18px;
+  background-color: #26b54c;
+}
+.poweronbtn {
+  width: 100%;
+  padding: 8px 18px;
+  background-color: #008000;
+}
+.poweronbtn2 {
+  width: 100%;
+  padding: 8px 18px;
+  background-color: #C00000;
+
+}
+.poweronbtn3 {
+  width: 100%;
+  padding: 8px 18px;
+  background-color: #000000;
+
+}
+
+
+.cancelbtn2 {
+  width: 100%;
+  padding: 20px 18px;
+  background-color: #8B0000;
+}
+.cancelbtn3 {
+  width: 100%;
+  padding: 20px 18px;
+  background-color: #989a4d;
+}
+.cancelbtn4 {
+  width: 100%;
+  padding: 20px 18px;
+  background-color: #000000;
+}
+
+table {
+  border-collapse: collapse;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 1%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+}
+</style>
+</head>
+<body>
