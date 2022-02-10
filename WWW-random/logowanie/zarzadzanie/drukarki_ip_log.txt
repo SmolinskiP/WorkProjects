@@ -1,0 +1,70 @@
+Ostatnia zmiana: <b>2021-06-25 08:07:37</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>192.168.0.5</b>
+
+Ostatnia zmiana: <b>2021-06-28 12:53:21</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>192.168.0.147</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:09:28</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>10.1.10.6</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:14:48</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>172.17.11.6</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:21:37</b>
+Dokonana przez: 154.13.1.214
+Z przeglądarki: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36
+IP zmieniono na: <b>192.168.2.0</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:38:40</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>10.0.0.0</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:38:51</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>10.0.0.6</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:39:02</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>10.0.0.1</b>
+
+Ostatnia zmiana: <b>2021-06-29 11:39:11</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0
+IP zmieniono na: <b>10.0.0.250</b>
+
+Ostatnia zmiana: <b>2021-07-14 11:50:33</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+IP zmieniono na: <b>192.168.0.14</b>
+
+Ostatnia zmiana: <b>2021-07-14 11:53:05</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+IP zmieniono na: <b>192.168.1.6</b>
+
+Ostatnia zmiana: <b>2021-07-14 11:54:09</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+IP zmieniono na: <b>192.168.0.14</b>
+
+Ostatnia zmiana: <b>2021-07-14 11:54:12</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+IP zmieniono na: <b>192.168.0.6</b>
+
+Ostatnia zmiana: <b>2021-07-14 13:01:47</b>
+Dokonana przez: <b>Patryk</b>
+Z przeglądarki: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+IP zmieniono na: <b>192.168.0.6</b>
+
