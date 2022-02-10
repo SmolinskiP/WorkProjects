@@ -1,0 +1,42 @@
+#!/bin/sh
+
+#################################################################################DHCP.CONF
+echo 'ddns-update-style=ad-hoc;
+option domain-name-servers 10.0.10.19, 8.8.8.8, 87.204.204.204, 10.0.10.1;
+
+authoritative;
+
+subnet 10.0.10.0 netmask 255.255.254.0 {
+  authoritative;
+  range 10.0.10.100 10.0.10.240;
+  option routers 10.0.10.1;
+  option broadcast-address 10.0.11.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+' > /etc/dhcp/dhcpd.conf
+
+
+mysql --user=asd --password=asd --database=asd -N -e "SELECT concat_ws('','host ',przypisanieip.idstanowiska,' { hardware ethernet ',komputery.mac,'; fixed-address ',przypisanieip.ip,'; } #',pracownicy.imie,' ',pracownicy.nazwisko,' ',komputery.komentarz) FROM przypisanieip left JOIN komputery ON przypisanieip.komputer = komputery.id left join pracownicy ON przypisanieip.pracownik = pracownicy.id WHERE komputery.mac IS NOT null ORDER by przypisanieip.idstanowiska ASC" >> /etc/dhcp/dhcpd.conf
+
+echo '}' >> /etc/dhcp/dhcpd.conf
+
+systemctl restart isc-dhcp-server
+
+################################################################################ KONIEC DHCPD.CONF
+################################################################################ ETC/HOSTS
+
+#echo 'hosts'
+#echo '127.0.0.1 localhost' > /etc/hosts
+#echo '127.0.1.1 debian' >> /etc/hosts
+
+#echo '# The following lines are desirable for IPv6 capable hosts' >> /etc/hosts
+#echo '::1     localhost ip6-localhost ip6-loopback' >> /etc/hosts
+#echo 'ff02::1 ip6-allnodes' >> /etc/hosts
+#echo 'ff02::2 ip6-allrouters' >> /etc/hosts
+
+mysql --user=asd --password=asd --database=asd -N -e"SELECT CONCAT_WS('',przypisanieip.ip,' ',pracownicy.imie,pracownicy.nazwisko,komputery.komentarz) FROM przypisanieip left JOIN komputery ON przypisanieip.komputer = komputery.id left join pracownicy ON przypisanieip.pracownik = pracownicy.id WHERE pracownicy.imie IS not NULL or pracownicy.nazwisko IS not NULL or komputery.komentarz IS not NULL ORDER by length(przypisanieip.ip), przypisanieip.ip" > /home/patryk/hosts.txt
+echo '10.0.10.19 dc1.pda.local dc1' > /etc/hosts
+zmienna=$(iconv -f UTF8 -t US-ASCII//TRANSLIT /home/patryk/hosts.txt)
+echo "$zmienna" >> /etc/hosts
+echo '127.0.0.1 localhost' >> /etc/hosts
+############################################################################## KONIEC ETC/HOSTS

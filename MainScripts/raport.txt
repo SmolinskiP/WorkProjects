@@ -1,0 +1,31 @@
+---===RAPORT ZAJETOSCI DYSKOW===---
+Zajetosc dysku md0  zamontowanego na / wynosi 28 procent
+/dev/md0 19G 4,8G 13G 28% /
+
+Zajetosc dysku md2  zamontowanego na /home wynosi 21 procent
+/dev/md2 28G 5,3G 21G 21% /home
+
+Zajetosc dysku md3  zamontowanego na /var wynosi 85 procent
+/dev/md3 34G 27G 5,1G 85% /var
+
+Zajetosc dysku md12 zamontowanego na /mnt/md11 wynosi 66 procent
+/dev/md127 7,3T 4,5T 2,4T 66% /mnt/md11
+
+---===RAPORT TEMPERATUR===---
+-=Procesor:=-
+Core 0: +56.0°
+Core 1: +56.0°
+Core 2: +54.0°
+Core 3: +54.0°
+ 
+-=ISA adapter=-
+temp1: +44.0°C pobrane z sensora:  thermistor
+temp2: +48.0°C pobrane z sensora:  thermal diode
+temp3: -2.0°C  pobrane z sensora:  thermistor
+
+-=DYSKI=-
+Dysk SDA:V Series SATA SSD 120GB: 48°C
+Dysk SDC:
+Dysk SDD:WDC WD80EFAX-68KNBN0: 44°C
+Dysk SDE:WDC WD80EFAX-68KNBN0: 43°C
+Dysk SDF:

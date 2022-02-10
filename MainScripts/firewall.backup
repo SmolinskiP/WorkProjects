@@ -1,0 +1,233 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides: firewall
+# Required-Start: $local_fs $remote_fs
+# Required-Stop: $local_fs $remote_fs
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Start daemon at boot time
+# Description: Enable service provided by daemon.
+### END INIT INFO
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -F
+iptables -F -t nat
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A FORWARD -o lo -j ACCEPT
+
+iptables -A INPUT -p tcp -i enp6s0 --dport 80 -j ACCEPT		#HTTP
+iptables -A INPUT -p tcp -i enp6s0 --dport 443 -j ACCEPT	#HTTPS
+
+iptables -A INPUT -p tcp -i enp6s0 --dport 20 -j ACCEPT
+iptables -A INPUT -p tcp -i enp6s0 --dport 21 -j ACCEPT
+iptables -A INPUT -p tcp -i enp6s0 --dport 55000:60000 -j ACCEPT
+iptables -A INPUT -p tcp -i enp6s0 --dport 4224 -j ACCEPT	#SSH
+
+iptables -A INPUT -p tcp  –s 10.0.10.89 –d 212.77.98.9 -j DROP
+iptables -A INPUT -p udp  –s 10.0.10.89 –d 212.77.98.9 -j DROP
+#iptables -A INPUT -p tcp -i enp6s0 --dport 33125 -j ACCEPT
+#iptables -A INPUT -p udp -i enp6s0 --dport 33125 -j ACCEPT
+#iptables -I FORWARD -p tcp -d 10.0.11.125 --dport 3389 -j ACCEPT
+#iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 33125 -j DNAT --to-destination 10.0.11.125:3389
+#iptables -I FORWARD -p udp -d 10.0.11.125 --dport 3389 -j ACCEPT
+#iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 33125 -j DNAT --to-destination 10.0.11.125:3389
+
+#patryk zdalny dostep
+iptables -A INPUT -p tcp -i enp6s0 --dport 59089 -j ACCEPT
+iptables -A INPUT -p udp -i enp6s0 --dport 59089 -j ACCEPT
+iptables -I FORWARD -p tcp -d 10.0.10.89 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59089 -j DNAT --to-destination 10.0.10.89:5900
+iptables -I FORWARD -p udp -d 10.0.10.89 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59089 -j DNAT --to-destination 10.0.10.89:5900
+
+#OBSERWATOR
+iptables -A INPUT -p tcp -i enp6s0 --dport 59160 -j ACCEPT
+iptables -A INPUT -p udp -i enp6s0 --dport 59160 -j ACCEPT
+iptables -I FORWARD -p tcp -d 10.0.11.60 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59160 -j DNAT --to-destination 10.0.11.60:5900
+iptables -I FORWARD -p udp -d 10.0.11.60 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59160 -j DNAT --to-destination 10.0.11.60:5900
+
+
+#patryk zdalny dostep 2
+iptables -A INPUT -p tcp -i enp6s0 --dport 666 -j ACCEPT
+iptables -A INPUT -p udp -i enp6s0 --dport 666 -j ACCEPT
+iptables -I FORWARD -p tcp -d 10.0.10.89 --dport 80 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 666 -j DNAT --to-destination 10.0.10.89:80
+iptables -I FORWARD -p udp -d 10.0.10.89 --dport 80 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 666 -j DNAT --to-destination 10.0.10.89:80
+
+
+#stary routerek
+iptables -A INPUT -p tcp -i enp6s0 --dport 82 -j ACCEPT
+iptables -A INPUT -p udp -i enp6s0 --dport 82 -j ACCEPT
+iptables -I FORWARD -p tcp -d 10.0.10.2 --dport 82 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 82 -j DNAT --to-destination 10.0.10.2:82
+iptables -I FORWARD -p udp -d 10.0.10.2 --dport 82 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 82 -j DNAT --to-destination 10.0.10.2:82
+
+#Wapro RDP
+iptables -A INPUT -p tcp -i enp6s0 --dport 3333 -j ACCEPT #3389 122 new 10.10
+iptables -A INPUT -p udp -i enp6s0 --dport 3333 -j ACCEPT #3389 122 
+iptables -I FORWARD -p tcp -d 10.0.10.10 --dport 3389 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 3333 -j DNAT --to-destination 10.0.10.10:3389
+iptables -I FORWARD -p udp -d 10.0.10.10 --dport 3389 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 3333 -j DNAT --to-destination 10.0.10.10:3389
+
+#NAS Web
+iptables -A INPUT -p tcp -i enp6s0 --dport 8081 -j ACCEPT #254 new 10.11:80
+iptables -A INPUT -p udp -i enp6s0 --dport 8081 -j ACCEPT #254
+iptables -I FORWARD -p tcp -d 10.0.10.11 --dport 80 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 8081 -j DNAT --to-destination 10.0.10.11:80
+iptables -I FORWARD -p udp -d 10.0.10.11 --dport 80 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 8081 -j DNAT --to-destination 10.0.10.11:80
+
+#NAS 
+iptables -A INPUT -p tcp -i enp6s0 --dport 5000 -j ACCEPT #254 new 10.11
+iptables -A INPUT -p udp -i enp6s0 --dport 5000 -j ACCEPT #254
+iptables -I FORWARD -p tcp -d 10.0.10.11 --dport 5000 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 5000 -j DNAT --to-destination 10.0.10.11:5000
+iptables -I FORWARD -p udp -d 10.0.10.11 --dport 5000 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 5000 -j DNAT --to-destination 10.0.10.11:5000
+
+#NAS
+iptables -A INPUT -p tcp -i enp6s0 --dport 5001 -j ACCEPT #254 new 10.11
+iptables -A INPUT -p udp -i enp6s0 --dport 5001 -j ACCEPT #254
+iptables -I FORWARD -p tcp -d 10.0.10.11 --dport 5001 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 5001 -j DNAT --to-destination 10.0.10.11:5001
+iptables -I FORWARD -p udp -d 10.0.10.11 --dport 5001 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 5001 -j DNAT --to-destination 10.0.10.11:5001
+
+#Wapro
+iptables -A INPUT -p tcp -i enp6s0 --dport 1723 -j ACCEPT #120 new 10.10
+iptables -A INPUT -p udp -i enp6s0 --dport 1723 -j ACCEPT #120
+iptables -I FORWARD -p tcp -d 10.0.10.10 --dport 1723 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 1723 -j DNAT --to-destination 10.0.10.10:1723
+iptables -I FORWARD -p udp -d 10.0.10.10 --dport 1723 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 1723 -j DNAT --to-destination 10.0.10.10:1723
+
+#Wapro
+iptables -A INPUT -p tcp -i enp6s0 --dport 500 -j ACCEPT #120 new 10.10
+iptables -A INPUT -p udp -i enp6s0 --dport 500 -j ACCEPT #120
+iptables -I FORWARD -p tcp -d 10.0.10.10 --dport 500 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 500 -j DNAT --to-destination 10.0.10.10:500
+iptables -I FORWARD -p udp -d 10.0.10.10 --dport 500 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 500 -j DNAT --to-destination 10.0.10.10:500
+
+#Wapro
+iptables -A INPUT -p tcp -i enp6s0 --dport 1701 -j ACCEPT #120 new 10.10
+iptables -A INPUT -p udp -i enp6s0 --dport 1701 -j ACCEPT #120
+iptables -I FORWARD -p tcp -d 10.0.10.10 --dport 1701 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 1701 -j DNAT --to-destination 10.0.10.10:1701
+iptables -I FORWARD -p udp -d 10.0.10.10 --dport 1701 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 1701 -j DNAT --to-destination 10.0.10.10:1701
+
+#Monitoring
+iptables -A INPUT -p tcp -i enp6s0 --dport 8200 -j ACCEPT #8200 129 new 10.12
+iptables -A INPUT -p udp -i enp6s0 --dport 8200 -j ACCEPT #8200 129
+iptables -I FORWARD -p tcp -d 10.0.10.12 --dport 8200 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 8200 -j DNAT --to-destination 10.0.10.12:8200
+iptables -I FORWARD -p udp -d 10.0.10.12 --dport 8200 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 8200 -j DNAT --to-destination 10.0.10.12:8200
+
+#Monitoring
+iptables -A INPUT -p tcp -i enp6s0 --dport 8201 -j ACCEPT #8201 129 new 10.12
+iptables -A INPUT -p udp -i enp6s0 --dport 8201 -j ACCEPT #8201 129
+iptables -I FORWARD -p tcp -d 10.0.10.12 --dport 8201 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 8201 -j DNAT --to-destination 10.0.10.12:8201
+iptables -I FORWARD -p udp -d 10.0.10.12 --dport 8201 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 8201 -j DNAT --to-destination 10.0.10.12:8201
+
+#Monitoring
+iptables -A INPUT -p tcp -i enp6s0 --dport 8016 -j ACCEPT #8201 129 new 10.12
+iptables -A INPUT -p udp -i enp6s0 --dport 8016 -j ACCEPT #8201 129
+iptables -I FORWARD -p tcp -d 10.0.10.12 --dport 8016 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 8016 -j DNAT --to-destination 10.0.10.12:8016
+iptables -I FORWARD -p udp -d 10.0.10.12 --dport 8016 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 8016 -j DNAT --to-destination 10.0.10.12:8016
+
+#Monitoring
+iptables -A INPUT -p tcp -i enp6s0 --dport 10019 -j ACCEPT #8201 129 new 10.12
+iptables -A INPUT -p udp -i enp6s0 --dport 10019 -j ACCEPT #8201 129
+iptables -I FORWARD -p tcp -d 10.0.10.12 --dport 10019 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 10019 -j DNAT --to-destination 10.0.10.12:10019
+iptables -I FORWARD -p udp -d 10.0.10.12 --dport 10019 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 10019 -j DNAT --to-destination 10.0.10.12:10019
+
+#RDP Ksiegowa
+iptables -A INPUT -p tcp -i enp6s0 --dport 3366 -j ACCEPT
+iptables -A INPUT -p udp -i enp6s0 --dport 3366 -j ACCEPT
+iptables -I FORWARD -p tcp -d 10.0.11.180 --dport 3389 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 3366 -j DNAT --to-destination 10.0.11.180:3389
+iptables -I FORWARD -p udp -d 10.0.11.180 --dport 3389 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 3366 -j DNAT --to-destination 10.0.11.180:3389
+
+#Zdalny dostep IWONA
+iptables -A INPUT -p tcp -i enp6s0 --dport 59185 -j ACCEPT #185
+iptables -A INPUT -p udp -i enp6s0 --dport 59185 -j ACCEPT #185
+iptables -I FORWARD -p tcp -d 10.0.11.182 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59185 -j DNAT --to-destination 10.0.11.182:5900
+iptables -I FORWARD -p udp -d 10.0.11.182 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59185 -j DNAT --to-destination 10.0.11.182:5900
+
+#Zdalny dostep KRYSTIAN
+iptables -A INPUT -p tcp -i enp6s0 --dport 59179 -j ACCEPT #179
+iptables -A INPUT -p udp -i enp6s0 --dport 59179 -j ACCEPT #179
+iptables -I FORWARD -p tcp -d 10.0.11.183 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59179 -j DNAT --to-destination 10.0.11.183:5900
+iptables -I FORWARD -p udp -d 10.0.11.183 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59179 -j DNAT --to-destination 10.0.11.183:5900
+
+#Zdalny dostep AGNIESZKA
+iptables -A INPUT -p tcp -i enp6s0 --dport 59128 -j ACCEPT #128
+iptables -A INPUT -p udp -i enp6s0 --dport 59128 -j ACCEPT #128
+iptables -I FORWARD -p tcp -d 10.0.11.181 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59128 -j DNAT --to-destination 10.0.11.181:5900
+iptables -I FORWARD -p udp -d 10.0.11.181 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59128 -j DNAT --to-destination 10.0.11.181:5900
+
+#Zdalny dostep KASIA
+iptables -A INPUT -p tcp -i enp6s0 --dport 59115 -j ACCEPT #115
+iptables -A INPUT -p udp -i enp6s0 --dport 59115 -j ACCEPT #115
+iptables -I FORWARD -p tcp -d 10.0.11.130 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59115 -j DNAT --to-destination 10.0.11.130:5900
+iptables -I FORWARD -p udp -d 10.0.11.130 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59115 -j DNAT --to-destination 10.0.11.130:5900
+
+#Zdalny dostep PLOTER
+iptables -A INPUT -p tcp -i enp6s0 --dport 59248 -j ACCEPT
+iptables -A INPUT -p udp -i enp6s0 --dport 59248 -j ACCEPT
+iptables -I FORWARD -p tcp -d 10.0.11.164 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 59248 -j DNAT --to-destination 10.0.11.164:5900
+iptables -I FORWARD -p udp -d 10.0.11.164 --dport 5900 -j ACCEPT
+iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 59248 -j DNAT --to-destination 10.0.11.164:5900
+
+#OKI 362
+#iptables -A INPUT -p tcp -i enp6s0 --dport 9101 -j ACCEPT
+#iptables -A INPUT -p udp -i enp6s0 --dport 9101 -j ACCEPT
+#iptables -I FORWARD -p tcp -d 10.0.10.44 --dport 9100 -j ACCEPT
+#iptables -t nat -I PREROUTING -p tcp -i enp6s0 -d 0/0 --dport 9101 -j DNAT --to-destination 10.0.10.44:9100
+#iptables -I FORWARD -p udp -d 10.0.10.44 --dport 9100 -j ACCEPT
+#iptables -t nat -I PREROUTING -p udp -i enp6s0 -d 0/0 --dport 9101 -j DNAT --to-destination 10.0.10.44:9100
+
+
+
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT -m limit --limit 1/sec
+
+iptables -A INPUT -i enp3s0f0 -j ACCEPT
+iptables -A FORWARD -i enp3s0f0 -j ACCEPT
+
+
+iptables -t nat -I POSTROUTING -m policy --pol ipsec --dir out -j ACCEPT
+
+iptables -t nat -A POSTROUTING -o enp6s0 -j MASQUERADE
+
+
+iptables -A INPUT -j ACCEPT -m state --state ESTABLISHED,RELATED
+iptables -A FORWARD -j ACCEPT -m state --state ESTABLISHED,RELATED

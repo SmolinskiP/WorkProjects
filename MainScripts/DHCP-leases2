@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo arp -a | grep '?' > /var/www/html/logowanie/zarzadzanie/unknown.txt

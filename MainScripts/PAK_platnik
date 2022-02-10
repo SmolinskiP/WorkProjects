@@ -1,0 +1,10 @@
+#!/bin/bash
+    cd /
+
+    tar -cvf home/bursa_progman`date +%Y%m%d`.tar db/*
+
+    /etc/bursa_skrypty/ftp_progman
+
+    cd /
+    rm -f /home/bursa_progman`date +%Y%m%d`.tar
+exit 0

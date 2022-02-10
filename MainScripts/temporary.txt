@@ -1,0 +1,4 @@
+/dev/md0         19G  4,8G   13G  28% /
+/dev/md2         28G  5,3G   21G  21% /home
+/dev/md3         34G   27G  5,1G  85% /var
+/dev/md127      7,3T  4,5T  2,4T  66% /mnt/md11
