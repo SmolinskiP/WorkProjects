@@ -1,0 +1,53 @@
+<?php
+$servername = "127.0.0.1";
+$username = "siec";
+$password = "tajne";
+$dbname = "siec";
+echo '<html>';
+echo '<head>';
+echo '<table border=1>';
+mysqli_set_charset($db,"utf8");
+
+$db = new mysqli($servername, $username, $password, $dbname);
+
+$zapytanie = "SELECT przypisanieip.ip, przypisanieip.idstanowiska, komputery.mac, komputery.komentarz, pracownicy.imie, pracownicy.nazwisko FROM przypisanieip LEFT JOIN komputery ON przypisanieip.komputer = komputery.id LEFT JOIN pracownicy ON przypisanieip.pracownik = pracownicy.id ORDER by przypisanieip.idstanowiska ASC";
+$wynik = $db->query($zapytanie);
+$id=0;
+
+echo nl2br("ddns-update-style=ad-hoc;
+option domain-name-servers 10.0.10.1, 8.8.8.8, 87.204.204.204;
+
+authoritative;
+
+subnet 10.0.10.0 netmask 255.255.254.0 {
+&nbsp&nbspauthoritative;
+&nbsp&nbsprange 10.0.10.100 10.0.11.200;
+&nbsp&nbspoption routers 10.0.10.1;
+&nbsp&nbspoption broadcast-address 10.0.11.255;
+&nbsp&nbspdefault-lease-time 600;
+&nbsp&nbspmax-lease-time 7200;\n
+");
+while ($r = $wynik->fetch_assoc()) {
+    $id = $id + 1;
+//    $ip=$r['ip'];
+    $mac=$r['mac'];
+//    $imie=$r['imie'];
+//    $nazwisko=$r['nazwisko'];
+//    $idstanowiska=$r['idstanowiska'];
+//    $komentarz=$r['komentarz'];
+    if ($mac != ''){
+//    #echo "<tr><td colspan=4>$id</td><td> $idstanowiska </td><td> $ip </td><td> etherwake $mac </td><td> $imie $nazwisko </td></tr>";
+//    echo "host $idstanowiska {hardware ethernet $mac;    fixed-address $ip; } #$imie $nazwisko $komentarz <br>";
+    echo 'host '.$r['idstanowiska'].' {hardware ethernet '.$r['mac'].';    fixed-address '.$r['ip'].'; } #'.$r['imie'].' '.$r['nazwisko'].' '.$r['komentarz'].' <br>';
+}
+    else continue;
+
+}
+echo "}";
+echo '</table>';
+echo '</head>';
+echo '</html>';
+
+
+?>
+
