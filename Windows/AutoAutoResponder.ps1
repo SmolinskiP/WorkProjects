@@ -1,4 +1,6 @@
 #Connect-MsolService
+#Import-Module ExchangeOnlineManagement
+#Connect-ExchangeOnline
 
 $Results = @();
 $Users = Get-MsolUser | Where-Object {($_.licenses).AccountSkuId -match "O365_BUSINESS" -or "TEAMS"} | Select-Object UserPrincipalName | Where-Object {$_.UserPrincipalName -match "pdaserwis.eu"}
